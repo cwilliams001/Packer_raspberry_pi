@@ -1,4 +1,3 @@
-  GNU nano 5.4                                                                zerotier_setup.sh                                                                          
 #!/bin/bash
 
 # Check if ZeroTier is installed
