@@ -34,24 +34,18 @@ qemu_binary_destination_path =  "/usr/bin/qemu-aarch64-static"
 
 }
 
+variable "tailscale_auth_key" {
+  type    = string
+}
+
 build {
   sources = ["source.arm.raspbian"]
 
-  provisioner "file" {
-    source      = "zerotier-setup.sh"
-    destination = "/opt/"
-  }
-
   provisioner "shell" {
     script = "provision-pi.sh"
-  }
-
-  provisioner "shell" {
-    inline = [
-      "chmod +x /opt/zerotier-setup.sh",
-      "echo '@reboot sleep 60 && /opt/zerotier-setup.sh' >> mycron",
-      "crontab mycron",
-      "rm mycron"
+    environment_vars = [
+      "TAILSCALE_AUTH_KEY=${var.tailscale_auth_key}",
     ]
   }
+
 }
