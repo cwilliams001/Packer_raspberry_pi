@@ -7,7 +7,8 @@ touch /boot/ssh
 # Generate a hash for a password using the following command "openssl passwd -6 your-password-here"
 # Use "\" to escape the "$" in the password hash
 useradd -m -s /bin/bash ots
-echo "ots:YOUR_HASHED_PASSWORD" | chpasswd -e
+echo "ots:\$6\$eWm4YyeNVc.LZTFK\$I4iZNZNKTLB9SUpLqDBMjVI5mumKD7bJL59mgIsXGjtkPkvhRSE1gdWiIGVjEz3Yl05IYK8yLcalHTXmt3ET10" | chpasswd -e
+usermod -aG sudo ots
 
 # Remove the first boot wizard user
 userdel -r rpi-first-boot-wizard

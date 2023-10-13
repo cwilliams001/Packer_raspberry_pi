@@ -59,6 +59,3 @@ This command creates a custom Raspberry Pi image according to the specifications
 
 Once the command finishes, you'll find your custom image in the current directory. You can flash this image onto an SD card for use in a Raspberry Pi.
 
----
-
-Please replace "your-github-username" and "your-repository-name" with your actual GitHub username and the repository name where you are going to host this project.
