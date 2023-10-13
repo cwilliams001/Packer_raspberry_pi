@@ -2,7 +2,11 @@
 
 # Raspberry Pi Image Builder with Packer and Docker
 
-This project uses Packer and Docker to create custom Raspberry Pi images with additional provisioning like adding scripts that run at boot.
+Create custom Raspberry Pi images with additional provisioning using Packer and Docker. This project contains configurations for setting up either ZeroTier or Tailscale on a Raspberry Pi.
+
+## Features
+- ZeroTier Configuration (rpi-zerotier): Sets up a Raspberry Pi with ZeroTier for network connectivity.
+- Tailscale Configuration (rpi-tailscale): Sets up a Raspberry Pi with Tailscale for network connectivity.
 
 ## Prerequisites
 
@@ -10,6 +14,14 @@ To run the scripts and build a custom image, you'll need:
 
 - Docker installed on your local machine.
 - Packer Builder ARM Docker image (mkaczanowski/packer-builder-arm)
+
+## Usage
+
+### Configuration
+1. **`config.pkrvars.hcl`**: Modify this file to include your Tailscale authentication key.
+   ```hcl
+   tailscale_auth_key = "your-tailscale-auth-key"
+   ```
 
 ## Provisioning Scripts
 
@@ -58,4 +70,3 @@ This command creates a custom Raspberry Pi image according to the specifications
 ## Checking the Output
 
 Once the command finishes, you'll find your custom image in the current directory. You can flash this image onto an SD card for use in a Raspberry Pi.
-
