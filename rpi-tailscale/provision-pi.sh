@@ -23,7 +23,11 @@ chmod +x /etc/init.d/resize2fs_once
 systemctl enable resize2fs_once
 
 # Update the System
+apt remove chromium-browser -y
 apt update && apt upgrade -y
+apt install chromium-browser -y
+
+
 
 # Skip initial setup wizard
 echo "pi ALL=NOPASSWD: /usr/sbin/raspi-config, /sbin/shutdown" > /etc/sudoers.d/piwiz
@@ -48,7 +52,7 @@ curl -fsSL https://pkgs.tailscale.com/stable/raspbian/buster.list | sudo tee /et
 apt update
 
 # Install Tailscale
-apt install tailscale -y
+apt install tailscale wireguard wireguard-tools -y
 
 # Create systemd service file for Tailscale
 
@@ -65,6 +69,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/tailscale-up.service
 
 # Enable the service
 systemctl enable tailscale-up
+systemctl enable wireguard && systemctl start wireguard
 
 # Install and configure UFW
 apt install ufw -y

@@ -47,5 +47,9 @@ build {
       "TAILSCALE_AUTH_KEY=${var.tailscale_auth_key}",
     ]
   }
+  
+
+
+
 
 }

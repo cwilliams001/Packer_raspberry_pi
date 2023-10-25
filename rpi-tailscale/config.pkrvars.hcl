@@ -1,1 +1,1 @@
-tailscale_auth_key = "your-tailscale-auth-key"
+tailscale_auth_key = "your tailscale auth key"
