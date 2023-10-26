@@ -27,7 +27,6 @@ systemctl enable resize2fs_once
 # apt update && apt upgrade -y
 # apt install chromium-browser -y
 
-
 # Skip initial setup wizard
 echo "pi ALL=NOPASSWD: /usr/sbin/raspi-config, /sbin/shutdown" > /etc/sudoers.d/piwiz
 rm /etc/xdg/autostart/piwiz.desktop
@@ -58,11 +57,8 @@ WantedBy=multi-user.target" > /etc/systemd/system/cell-hat-setup.service
 # Enable the service so it runs on next boot
 systemctl enable cell-hat-setup.service
 
-
-# Install Wireguard
+# Install Applications
 apt install vim minicom wireguard wireguard-tools -y
-
-# Create systemd service file for Tailscale
 
 # Install and configure UFW
 apt install ufw -y

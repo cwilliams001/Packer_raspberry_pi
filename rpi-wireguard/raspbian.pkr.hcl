@@ -46,6 +46,14 @@ build {
 
   }
 
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /opt/source",
+      "echo '${var.apn_name}' > /opt/source/apn_name.txt"
+    ]
+  }
+
+
   provisioner "file" {
     source      = "cell-hat-setup.sh"
     destination = "/opt/source/cell-hat-setup.sh"

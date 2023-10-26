@@ -1,5 +1,7 @@
 #!/bin/bash
-
+sleep 60
+ZEROTIER_NETWORK_ID=$(cat /opt/source/zerotier_network_id.txt)
+sleep 5
 # Check if ZeroTier is installed
 if ! command -v zerotier-cli >/dev/null 2>&1; then
   # Update package lists
@@ -10,7 +12,6 @@ if ! command -v zerotier-cli >/dev/null 2>&1; then
 fi
 
 # Join the ZeroTier network
-ZEROTIER_NETWORK_ID="YOUR_NETWORK_ID_HERE"
 sudo zerotier-cli join $ZEROTIER_NETWORK_ID
 
 # Enable ZeroTier service at boot

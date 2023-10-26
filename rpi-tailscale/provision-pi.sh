@@ -27,8 +27,6 @@ apt remove chromium-browser -y
 apt update && apt upgrade -y
 apt install chromium-browser -y
 
-
-
 # Skip initial setup wizard
 echo "pi ALL=NOPASSWD: /usr/sbin/raspi-config, /sbin/shutdown" > /etc/sudoers.d/piwiz
 rm /etc/xdg/autostart/piwiz.desktop
@@ -41,7 +39,6 @@ raspi-config nonint do_change_timezone America/New_York
 # Auto login to command line (change to B4 for desktop auto-login)
 raspi-config nonint do_boot_behaviour B4
 
-
 # Add the Tailscale repository signing key
 curl -fsSL https://pkgs.tailscale.com/stable/raspbian/buster.gpg | sudo apt-key add -
 
@@ -50,9 +47,6 @@ curl -fsSL https://pkgs.tailscale.com/stable/raspbian/buster.list | sudo tee /et
 
 # Update the package list to include the Tailscale repository
 apt update
-
-# Install Tailscale
-apt install tailscale wireguard wireguard-tools -y
 
 # Create systemd service file for Tailscale
 
@@ -67,9 +61,27 @@ Type=oneshot
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/tailscale-up.service
 
+# Create systemd service file for cell-hat-setup
+
+echo "[Unit]
+Description=Cell Hat Setup
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/source/cell-hat-setup.sh
+RemainAfterExit=yes
+ExecStartPost=/bin/systemctl disable cell-hat-setup.service
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/cell-hat-setup.service
+
 # Enable the service
 systemctl enable tailscale-up
-systemctl enable wireguard && systemctl start wireguard
+systemctl enable cell-hat-setup.service
+
+# Install Applications
+apt install vim minicom tailscale wireguard wireguard-tools -y
 
 # Install and configure UFW
 apt install ufw -y
@@ -82,4 +94,3 @@ systemctl restart sshd
 
 # System cleanup
 apt autoremove -y && apt clean
-
