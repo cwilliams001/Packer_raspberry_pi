@@ -1,1 +1,1 @@
-apn_name = "wholesale"
+apn_name = "your APN name"
