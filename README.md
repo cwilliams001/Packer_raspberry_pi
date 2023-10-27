@@ -28,7 +28,7 @@ Each configuration folder contains provisioning scripts specific to the setup:
 
 **Important:** Create new user and replace in provision-pi.sh script (replace 'newuser' and 'your-password-hash' with your desired username and password hash)
  Generate a hash for a password using the following command `openssl passwd -6 your-password-here`
- Use "\" to escape the "$" in the password hash
+ Use "\\" to escape the "$" in the password hash
 
 ### rpi-wireguard
 - `provision-pi.sh`: This script prepares the Raspberry Pi image with general settings, user setup, locale, and necessary applications. 
@@ -57,10 +57,23 @@ Each configuration folder contains provisioning scripts specific to the setup:
 ### Configuration for rpi-tailscale
 1. **`config.pkrvars.hcl`**: This file holds the Tailscale authentication key and APN name. Be sure to replace the placeholders with your actual details.
    ```hcl
-   tailscale_auth_key = "your tailscale auth key"
+   tailscale_auth_key = "your-tailscale-auth-key"
    apn_name = "your APN name"
    ```
    The `provision-pi.sh` script in this configuration installs Tailscale and sets it up to connect on boot using a systemd service. It also installs WireGuard as Tailscale is built on top of it. The `cell-hat-setup.sh` script is identical to the one in the rpi-wireguard configuration, which sets up cellular connectivity.
+
+### rpi-netmaker
+- `provision-pi.sh`: Prepares the Raspberry Pi image with general settings, user setup, locale, and installs necessary applications including netmaker and WireGuard.
+- `cell-hat-setup.sh`: Configures the cell hat using AT commands.
+- `raspbian.pkr.hcl`: This is the Packer configuration file that orchestrates the build process, provisioning, and produces the custom Raspberry Pi image.
+
+### Configuration for rpi-netmaker
+1. **`config.pkrvars.hcl`**: This file holds the netmaker authentication key and APN name. Be sure to replace the placeholders with your actual details.
+   ```hcl
+   netmaker_auth_key = "your-netmaker-auth-key"
+   apn_name = "your APN name"
+   ```
+   The `provision-pi.sh` script in this configuration installs netmaker and sets it up to connect on boot using a systemd service. It also installs WireGuard as netmaker is built on top of it. The `cell-hat-setup.sh` script is identical to the one in the rpi-wireguard configuration, which sets up cellular connectivity.
 ---
 
 ## Building the Image

@@ -55,6 +55,7 @@ Description=Tailscale up
 After=network.target
 
 [Service]
+ExecStartPre=/bin/sleep 60
 ExecStart=/usr/bin/tailscale up --authkey ${TAILSCALE_AUTH_KEY}
 Type=oneshot
 
