@@ -82,7 +82,7 @@ Each configuration folder contains provisioning scripts specific to the setup:
 2. Run the following command to build the image:
 
 ```bash
-docker run --rm -it --privileged -v /dev:/dev -v ${PWD}:/build mkaczanowski/packer-builder-arm:latest build var-file=config.pkrvars.hcl raspbian.pkr.hcl
+docker run --rm -it --privileged -v /dev:/dev -v ${PWD}:/build mkaczanowski/packer-builder-arm:latest build -var-file=config.pkrvars.hcl raspbian.pkr.hcl
 ```
 
 This command does the following:
